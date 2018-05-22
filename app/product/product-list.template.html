@@ -1,0 +1,45 @@
+<ul class="list-group">
+    <!--<li class="list-group-item" ng-repeat="product in products | filter: {categoryId:categoryFilter} | filter: search">-->
+    <li class="list-group-item" ng-repeat="product in products  | filter: search">
+        <div class="row">
+            <div class="col-md-5">
+                <img class="productPicture" ng-click="productDetails(product.id)"  ng-src="{{product.imageURL}}" alt="{{product.name}}" >
+            </div>
+            <div class="col-md-7">
+
+
+
+                <p >{{product.name}}</p>
+                <p>Price: {{product.price}};-</p>
+                <p>Amount in stock: {{product.unitsInStock}} st</p>
+
+                <button class="btn btn-primary"  ng-click="infoBoxIsOpen = !infoBoxIsOpen" >Description</button>
+                <p></p>
+                <div ng-init="infoBoxIsOpen = false" ng-show="infoBoxIsOpen">
+                    {{product.description}}
+                </div>
+
+
+                <table class="table table-hover  table-condensed">
+                    <thead>
+                    <tr>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr >
+                        <td></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-success"   ng-click="addToCart(product, amount=1)" ng-disabled="checkStock(product.unitsInStock)">Add to cart</button>
+
+                <!--<button class="btn btn-success"  ng-click="productDetailsClicked(product.id)" >To description</button>-->
+
+            </div>
+        </div>
+    </li>
+</ul>

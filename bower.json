@@ -1,0 +1,19 @@
+{
+  "name": "NZOnlineShop",
+  "description": "A company",
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-animate": "^1.6.2",
+    "angular-bootstrap": "^2.5.0",
+    "angular-route": "^1.6.2"
+  }
+}

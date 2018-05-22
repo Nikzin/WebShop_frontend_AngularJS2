@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NZOnlineShop</title>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="logins.css" rel="stylesheet">
+
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+    <script src="app/app.controller.js"></script>
+    <script src="app/app.service.js"></script>
+
+    <script src="app/product/product.module.js"></script>
+    <script src="app/product/product.service.js"></script>
+    <script src="app/product/product.controller.js"></script>
+
+    <script src="app/category/category.module.js"></script>
+    <script src="app/category/category.controller.js"></script>
+    <script src="app/category/category.service.js"></script>
+
+    <script src="app/login/login.module.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    <script src="app/login/login.service.js"></script>
+
+    <script src="app/cart/cart.module.js"></script>
+    <script src="app/cart/cart.controller.js"></script>
+    <script src="app/cart/cart.service.js"></script>
+
+    <script src="app/productdetails/productdetails.module.js"></script>
+    <script src="app/productdetails/productdetails.controller.js"></script>
+
+    <script src="app/newCustomer/newCustomer.module.js"></script>
+    <script src="app/newCustomer/newCustomer.controller.js"></script>
+    <script src="app/newCustomer/newCustomer.service.js"></script>
+
+    <script src="app/user/user.module.js"></script>
+    <script src="app/user/user.controller.js"></script>
+
+
+    <script src="app/user/orderdetails.module.js"></script>
+    <script src="app/user/order-details.controller.js"></script>
+
+    <script src="app/user/user.service.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="appController">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <img class="logo" src="app/images/hat-of-horseman-typical-of-mexico.png"/><h4 class="navbar-text">NZ online shop</h4>
+        </div>
+
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="/" ng-click="allCategories()"><span class="glyphicon glyphicon-home" ></span> Home</a></li>
+
+
+
+          <!--  <li  ng-controller="categoryController">
+             <h5>Categories :</h5>
+                <select  ng-model="selected" ng-change="SetCategory(selected.id)"
+                 ng-options="category.name for category in categories" placeholder="Choose category">
+                    <option value="">All products</option>
+                </select>
+            </li>-->
+
+            <li uib-dropdown ng-controller="categoryController">
+                <a  ng-show="productsHome()" uib-dropdown-toggle>Categories<span class="caret"></span></a>
+                <ul uib-dropdown-menu uib-collapse="!isCollapsed" class="dropdown-menu" >
+                    <li class="list-group-item"><a ng-click="SetCategory()">All products</a></li>
+                    <li ng-repeat="category in categories" ng-click="SetCategory(category.id)"  class="list-group-item"><a>{{category.name}}</a></li>
+                </ul>
+            </li>
+
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input ng-model="search" type="text" class="form-control" placeholder="Search">
+                </div>
+            </form>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Check out</a></li>
+            <li><a ng-show="!loggedIn()"  ng-click="homeOut()" href="/new-user"><span class="glyphicon glyphicon-user"></span> New user</a></li>
+            <li><a ng-show="!loggedIn()" id="login" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+            <li><a ng-show="loggedIn()" ng-click="logOut()" id="logout" href="/"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+            <li><a ng-show="loggedIn()"id="user"  href="/user"><span class="glyphicon glyphicon-user"></span> {{getCustomer1 }}'s home   </a></li>
+
+
+        </ul>
+    </div>
+
+</nav>
+
+<div class="container">
+    <div ng-view></div>
+</div>
+
+</body>
+
+<footer class="navbar-bottom">
+    <hr>
+    <p id="footer-text">Copyright 2018 NZ</p>
+</footer>
+</html>

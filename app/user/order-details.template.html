@@ -1,0 +1,23 @@
+<div class="jumbotron">
+    <p>Order number: {{order.id}}</p>
+    <p>User: {{customer.firstName}} {{customer.lastName}}</p>
+   <!-- <p>Date: {{date}}</p>
+    <p>Time: {{time}}</p>-->
+    <p>DateTime: {{order.dateTime}}</p>-
+   <table class="table">
+        <thead>
+            <th>Product number</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </thead>
+        <tbody ng-repeat="product in products">
+            <td>{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+        </tbody>
+    </table>
+    <p>Total price: {{total}}</p>
+</div>
+<a class="btn btn-danger" href="/user">Go back</a>

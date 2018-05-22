@@ -1,0 +1,42 @@
+
+<!--<tr ng-model="product">-->
+
+<div class="row" ng-model="product">
+    <div class="col-md-5">
+        <img class="productPicture1" ng-src="{{product.imageURL}}" alt="{{product.name}}">
+    </div>
+    <div class="col-md-7">
+
+
+        <table class="table table-hover  table-condensed">
+            <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+        <div >
+            Description {{product.description}}
+        </div>
+        <p>Amount in stock: {{product.unitsInStock}} st</p>
+
+        <a class="btn btn-primary" href="/Products">Back</a>
+
+
+
+
+    </div>
+</div>

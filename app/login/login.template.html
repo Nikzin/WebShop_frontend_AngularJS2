@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">To order</h1>
+            <div class="account-wall">
+                <img class="profile-img" src="app/images/shop.png"
+                     alt="">
+
+
+                <form name="loginform" class="form-signin">
+                    <div class="form-group" ng-class="{ 'has-error': loginform.email.$invalid && loginform.email.$touched}">
+
+                        <label class="control-label" for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="email" required>
+                    </div>
+
+
+                    <div class="form-group" ng-class="{ 'has-error': loginform.password.$invalid && loginform.password.$touched}">
+
+                        <label class="control-label" for="password" >Password </label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="password" required>
+                        <p style="color:red;">{{loginFailedmessage}}</p>
+                    </div>
+
+                    <button ng-disabled="loginform.$invalid" class="btn btn-lg btn-primary btn-block" type="submit" ng-click="logIn()">Login</button>
+
+                    <a href="/new-user" class="text-center new-account">New user</a>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<h1>{{cartMessage}}</h1>
+
+
+<ul class="list-group" ng-controller="cartController" >
+    <li class="list-group-item" ng-repeat="product in cart">
+        <div class="row">
+            <div class="col-md-5">
+                <img class="productPicture " ng-src="{{product.imageUrl}}" alt="">
+            </div>
+            <div class="col-md-4">
+                <p>{{product.name}}</p>
+                <p>Price: {{product.price}};</p>
+                <p>Amount: {{product.amount}}</p>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-danger" ng-click="removeFromCart(product)">Remove</button>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+<div class="row">
+    <p ng-show="checkCart()">Total price  {{totalAmount}}</p>
+    <button class="btn-success" ng-click="sendOrder()" ng-show="checkCart()">Send order</button>
+    <p>{{errorMessage}}</p>
+</div>
