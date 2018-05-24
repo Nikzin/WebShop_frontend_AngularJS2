@@ -42,12 +42,11 @@
     </div>
 
 
-
     <div class="col-md-7">
         <h1>Order history</h1>
         <table class="table">
             <thead>
-                <th>Order number</th>
+                <th>Order ID</th>
                 <th>Date </th>
             </thead>
             <tbody class="table-hover" ng-repeat="order in userOrders" >
@@ -55,7 +54,7 @@
                 <td>{{order.dateTime}}</td>
                 <td><button class="btn" ng-click="showDetailInfo(order.id)">Detailed info</button></td>
         </table>
-        <h2>Toalbelopp: {{totalAmount1}} kr</h2>
+        <h2>Total amount: {{totalAmount1}} kr</h2>
 
     </div>
 </div>

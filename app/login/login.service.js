@@ -1,4 +1,4 @@
-angular.module("login").factory("loginServiceFactory", ["$http", "$location", function ($http, $location) {
+angular.module("login").factory("loginServiceFactory", ["$http", "$location", 'myUrl', function ($http, $location, myUrl) {
 
     var isLoggedIn = false;
     var user = null;
@@ -6,7 +6,8 @@ angular.module("login").factory("loginServiceFactory", ["$http", "$location", fu
 
     return {
         logIn: function (login) {
-            return $http.post("http://localhost:8080/api/customer/login", login);
+
+            return $http.post(myUrl.key1+"/api/customer/login", login);
         },
         isLoggedIn: function () {
             return isLoggedIn;

@@ -16,23 +16,17 @@ angular.module("product")
                     return productServiceFactory.getChosenCategory();
                 }, function (value) {
                 if (value == undefined){
-                    console.log("chosen category is undefined again");
-                }
+                    }
                     productServiceFactory.getProductByCategoryId().then(function (response) {
                         products=response.data;
                         $scope.products = products ;
                     });
-
                 }
             );
-
 
             $scope.addToCart = function (product, amount) {
                 cartServiceFactory.addToCart(product, amount);
             };
-
-
-
 
             $scope.checkStock = function (unitsInStock) {
                 if (unitsInStock >= 1) {
@@ -42,13 +36,10 @@ angular.module("product")
                 }
             };
 
-
             productServiceFactory.getProductByCategoryId().then(function (response) {
                 products=response.data;
                 $scope.products = products ;
             });
-
-
 
             $scope.productsInStock = function (product) {
 
@@ -59,13 +50,8 @@ angular.module("product")
                 return inStock;
             };
 
-
-                $scope.   productDetails =function (id){
-                console.log("productDetails "+ id);
+                $scope.productDetails =function (id){
                 $location.path("/product/" + id);
             }
-
-
-
 
         }]);

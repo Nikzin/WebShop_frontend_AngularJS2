@@ -35,7 +35,6 @@ angular.module("cart")
                 totalAmount += (product.price * product.amount);
             });
             $scope.totalAmount = totalAmount;
-
         }
 
         $scope.removeFromCart = function (product) {

@@ -1,8 +1,8 @@
-angular.module("newUser").factory("newUserFactoryService", ["$http", function ($http) {
+angular.module("newUser").factory("newUserFactoryService", ["$http", 'myUrl',function ($http, myUrl) {
 
     return {
     	createNewCustomer    :   function (customer) {
-            return $http.post("http://localhost:8080/api/customer ", customer);
+            return $http.post(myUrl.key1+"/api/customer", customer);
         }
     };
 

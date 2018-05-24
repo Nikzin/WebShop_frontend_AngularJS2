@@ -9,12 +9,9 @@ angular.module("user").controller("userController", ["$scope", "$location", "$ht
         var orderProducts = [];
         var allProducts = [];
 
-
-
         angular.forEach(userOrders, function (order) {
             orderProducts.push(order.products);
                    });
-
 
         productServiceFactory.getProductByCategoryId().then(function (response) {
             allProducts = response.data;
@@ -29,15 +26,10 @@ angular.module("user").controller("userController", ["$scope", "$location", "$ht
                 });
             });
             $scope.totalAmount1 = total;
-
-
         });
-
-
 
         $scope.userOrders = userOrders;
     });
-
 
     userFactoryService.getUserInfo(loginServiceFactory.getUserId()).then(function (response) {
         user = response.data;
@@ -71,9 +63,7 @@ angular.module("user").controller("userController", ["$scope", "$location", "$ht
             userInfo.id = loginServiceFactory.getUserId();
             delete userInfo['password'];
             loginServiceFactory.setUser(userInfo);
-           // console.log(loginServiceFactory.getUser());
-        });
-
+               });
     };
 
     $scope.showDetailInfo = function (id) {

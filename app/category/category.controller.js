@@ -5,7 +5,7 @@ angular.module("category")
             categoryServiceFactory.getCategories().then(function (response) {
 
                 $scope.categories = response.data;
-               // $scope.categories.push({ name: "Alla produkter" });
+
             });
 
         }]);

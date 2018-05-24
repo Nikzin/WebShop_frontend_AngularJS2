@@ -20,7 +20,7 @@ var logmessage1="initial";
                 if (customer1 != "") {
                     loginServiceFactory.setLoginState(true);
                     loginServiceFactory.setUser(response.data);
-                //    console.log("customer name " + customer1.firstName);
+
                     $location.url("/");
                 }
 

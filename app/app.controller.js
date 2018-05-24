@@ -5,27 +5,17 @@ angular.module("app").controller("appController", ["$scope", "appServiceFactory"
         $scope.allCategories = function () {
             productServiceFactory.setHomeState(true);
             productServiceFactory.setnoCategory();
-
-
         };
+
         var userHome = appService.getUserHome ();
         $scope.userHome = userHome;
 
 
         $scope.SetCategory = function (id) {
        
-         //   console.log("Setted1 category: ", id);
-
-            productServiceFactory.setChosenCategory(id);
+         productServiceFactory.setChosenCategory(id);
 
         };
-       // $scope.getCustomer1 = function () {
-
-            /*$scope.getCustomer1 =
-           loginServiceFactory.getCustomer();
-          // loginServiceFactory.isLoggedIn();*/
-
-
 
            $scope.$watch(function () {
                 return  loginServiceFactory.getUser();
@@ -33,28 +23,24 @@ angular.module("app").controller("appController", ["$scope", "appServiceFactory"
                     $scope.getCustomer1 =
                         loginServiceFactory.getCustomer();
             });
-// do not delete example:
-     /*  $scope.$watch(function () {
-            $scope.getCustomer1 =
-                loginServiceFactory.getCustomer();
-        });*/
-
-// loginServiceFactory.isLoggedIn();
-
+        // do not delete alt. example:
+        /*  $scope.$watch(function () {
+               $scope.getCustomer1 =
+                   loginServiceFactory.getCustomer();
+           });*/
 
         $scope.$watch(function () {
                 return productServiceFactory.getChosenCategory();
             }, function (value) {
                 if (value == undefined){
-                   // console.log("chosen category is undefined again");
-                }
+                                }
                 productServiceFactory.getProductByCategoryId().then(function (response) {
                     products=response.data;
                     $scope.products = products ;
                 });
-
             }
         );
+
 
         $scope.homeState = function () {
             return productServiceFactory.isHome();

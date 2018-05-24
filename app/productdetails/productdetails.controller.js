@@ -9,16 +9,7 @@ angular.module("productdetails")
                 product = response.data;
                 $scope.product = product;
 
-         /*       productServiceFactory.getProductCategoryById(product.categoryId).then(function (response) {
-
-
-                    category = response.data;
-                    product.categoryName = category.name;
-                    $scope.product = product;
-                });*/
-
-
-            });
+                  });
 
         }]);
     

@@ -1,13 +1,8 @@
-angular.module("category").factory("categoryServiceFactory", ["$http", function ($http) {
+angular.module("category").factory("categoryServiceFactory", ["$http",'myUrl', function ($http, myUrl) {
 
     return {
         getCategories         :   function () {
-            console.log("getCategories");
-            //return $http.get("http://nackbutik.azurewebsites.net/api/category");
-
-            return $http.get("http://localhost:8080/api/category");
-
-        }
-
+            return $http.get(myUrl.key1+"/api/category");
+            }
     }
 }]);

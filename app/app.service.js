@@ -15,10 +15,8 @@ angular.module("app").factory("appServiceFactory", function () {
             return userIsSet;
         },
 
-
         setUserIsSet: function (userIs) {
             userIsSet = userIs;
-            console.log ("userIsSet "+userIsSet);
         }
     }
 });

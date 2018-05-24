@@ -1,8 +1,7 @@
-angular.module("cart").factory("cartServiceFactory", ["$http", function ($http) {
+angular.module("cart").factory("cartServiceFactory", ["$http",'myUrl', function ($http, myUrl) {
     var cart = [];
     return {
         sendOrder1   :   function (cart1, customer) {
-
 
             var orderList = [];
 
@@ -13,18 +12,14 @@ angular.module("cart").factory("cartServiceFactory", ["$http", function ($http) 
                         quantity    :   product.amount
                     }
                 );
-
             });
-
 
             var order = {
                 customerId  :   customer.customerId,
                 products    :   orderList
             };
             cart = [];
-            return $http.post("http://localhost:8080/api/order", order);
-
-
+            return $http.post(myUrl.key1+"/api/order", order);
         },
 
         addToCart   :   function (product, amount) {
@@ -42,7 +37,6 @@ angular.module("cart").factory("cartServiceFactory", ["$http", function ($http) 
                 product.amount = amount;
                 cart.push(product);
             }
-
         },
 
         removeFromCart : function (product) {
