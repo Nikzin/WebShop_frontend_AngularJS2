@@ -11,7 +11,7 @@ angular.module("product")
               }
             );*/
 
-
+//12
         $scope.$watch(function () {
                     return productServiceFactory.getChosenCategory();
                 }, function (value) {
