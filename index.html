@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="shortcut icon" href="#" />
 <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -71,24 +72,15 @@
             <li><a href="/" ng-click="allCategories()"><span class="glyphicon glyphicon-home" ></span> Home</a></li>
 
 
-
-          <!--  <li  ng-controller="categoryController">
-             <h5>Categories :</h5>
-                <select  ng-model="selected" ng-change="SetCategory(selected.id)"
-                 ng-options="category.name for category in categories" placeholder="Choose category">
-                    <option value="">All products</option>
-                </select>
-            </li>-->
-
             <li uib-dropdown ng-controller="categoryController">
-                <a  ng-show="productsHome()" uib-dropdown-toggle>Categories<span class="caret"></span></a>
+                <a   uib-dropdown-toggle>Categories<span class="caret"></span></a>
                 <ul uib-dropdown-menu uib-collapse="!isCollapsed" class="dropdown-menu" >
-                    <li class="list-group-item"><a ng-click="SetCategory()">All products</a></li>
-                    <li ng-repeat="category in categories" ng-click="SetCategory(category.id)"  class="list-group-item"><a>{{category.name}}</a></li>
+                    <li class="list-group-item"><a ng-click="setCategory3(0)">All products</a></li>
+                    <li ng-repeat="category in categories" ng-click="setCategory3(category.id)"  class="list-group-item"><a>{{category.name}}</a></li>
                 </ul>
             </li>
 
-            <form class="navbar-form navbar-left">
+            <form  class="navbar-form navbar-left">
                 <div class="form-group">
                     <input ng-model="search" type="text" class="form-control" placeholder="Search">
                 </div>
@@ -96,12 +88,15 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Check out</a></li>
+            <li><a  ng-show="!loggedIn()" href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Check out </a></li>
+            <li><a ng-show="loggedIn()"   href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Check out    <b ng-show="loggedIn() && cartAmount() "> ({{cartAmount()}})</b> </a>
+            </li>
+
             <li><a ng-show="!loggedIn()"  ng-click="homeOut()" href="/new-user"><span class="glyphicon glyphicon-user"></span> New user</a></li>
             <li><a ng-show="!loggedIn()" id="login" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 
             <li><a ng-show="loggedIn()" ng-click="logOut()" id="logout" href="/"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-            <li><a ng-show="loggedIn()"id="user"  href="/user"><span class="glyphicon glyphicon-user"></span> {{getCustomer1 }}'s home   </a></li>
+            <li><a ng-show="loggedIn()"id="user"  href="/user"><span class="glyphicon glyphicon-user"></span>  {{getCustomerFirstName()}}'s home   </a></li>
 
 
         </ul>

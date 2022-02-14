@@ -1,6 +1,11 @@
 <ul class="list-group">
+
     <!--<li class="list-group-item" ng-repeat="product in products | filter: {categoryId:categoryFilter} | filter: search">-->
-    <li class="list-group-item" ng-repeat="product in products  | filter: search">
+<!--    <li class="list-group-item" ng-repeat="product in productList1()  ">-->
+<!--  <li class="list-group-item" ng-repeat="product in products1 | filter: search ">-->
+    <li class="list-group-item" ng-repeat="product in products3()| filter: search ">
+<!--    <li class="list-group-item" ng-repeat="product in getProducts() ">-->
+
         <div class="row">
             <div class="col-md-5">
                 <img class="productPicture" ng-click="productDetails(product.id)"  ng-src="{{product.imageURL}}" alt="{{product.name}}" >
@@ -35,8 +40,7 @@
                     </tbody>
                 </table>
 
-                <button class="btn btn-success"   ng-click="addToCart(product, amount=1)" ng-disabled="checkStock(product.unitsInStock)">Add to cart</button>
-
+                <button class="btn btn-success"   ng-click="addToCart(product, amount=1)" >Add to cart</button>
                 <!--<button class="btn btn-success"  ng-click="productDetailsClicked(product.id)" >To description</button>-->
 
             </div>

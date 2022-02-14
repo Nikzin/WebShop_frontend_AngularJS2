@@ -1,32 +1,22 @@
 angular.module("product")
-    .controller("productController", ["$scope", "$location", "productServiceFactory","cartServiceFactory",
-        function ($scope, $location, productServiceFactory, cartServiceFactory) {
+    .controller("productController", ["$scope", "$location", "productServiceFactory", "cartServiceFactory", "loginServiceFactory",
+        function ($scope, $location, productServiceFactory, cartServiceFactory, loginServiceFactory) {
 
-        var products=[];
-
-        /*   $scope.$watch(function () {
-                    return productServiceFactory.getChosenCategory();
-                }, function (value) {
-                    $scope.categoryFilter = value;
-              }
-            );*/
-
-//12
-        $scope.$watch(function () {
-                    return productServiceFactory.getChosenCategory();
-                }, function (value) {
-                if (value == undefined){
-                    }
-                    productServiceFactory.getProductByCategoryId().then(function (response) {
-                        products=response.data;
-                        $scope.products = products ;
+            var init = function () {
+                if (!productServiceFactory.getProducts3()) {
+                    productServiceFactory.getProductsByCategoryId(0).then(function (response) {
+                        productServiceFactory.setProducts3(response.data);
                     });
                 }
-            );
-
-            $scope.addToCart = function (product, amount) {
-                cartServiceFactory.addToCart(product, amount);
             };
+
+            init();
+
+        $scope.addToCart = function (product, amount) {
+            if (loginServiceFactory.isLoggedIn()) {
+                cartServiceFactory.addToCart(product, amount);
+            }
+        };
 
             $scope.checkStock = function (unitsInStock) {
                 if (unitsInStock >= 1) {
@@ -36,10 +26,10 @@ angular.module("product")
                 }
             };
 
-            productServiceFactory.getProductByCategoryId().then(function (response) {
-                products=response.data;
-                $scope.products = products ;
-            });
+            $scope.products3 = function (){
+               return  productServiceFactory.getProducts3();
+            };
+
 
             $scope.productsInStock = function (product) {
 

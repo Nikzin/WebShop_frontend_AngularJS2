@@ -1,5 +1,6 @@
-angular.module("cart").factory("cartServiceFactory", ["$http",'myUrl', function ($http, myUrl) {
+angular.module("cart").factory("cartServiceFactory", ["$http",'myUrl',"appServiceFactory", function ($http, myUrl, appService) {
     var cart = [];
+    var totalAmount;
     return {
         sendOrder1   :   function (cart1, customer) {
 
@@ -19,14 +20,16 @@ angular.module("cart").factory("cartServiceFactory", ["$http",'myUrl', function 
                 products    :   orderList
             };
             cart = [];
+            appService.setCartAmount(0);
             return $http.post(myUrl.key1+"/api/order", order);
         },
 
         addToCart   :   function (product, amount) {
-
+            appService.addCartAmount(amount);
             if (cart.length == 0){
                 product.amount = amount;
                 cart.push(product);
+
              } else {
                 for (var i = 0; i < cart.length; i++){
                     if (cart[i].id == product.id){
@@ -36,6 +39,7 @@ angular.module("cart").factory("cartServiceFactory", ["$http",'myUrl', function 
                 }
                 product.amount = amount;
                 cart.push(product);
+
             }
         },
 

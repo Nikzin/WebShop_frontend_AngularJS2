@@ -1,44 +1,42 @@
 angular.module("login").factory("loginServiceFactory", ["$http", "$location", 'myUrl', function ($http, $location, myUrl) {
 
-    var isLoggedIn = false;
-    var user = null;
-    var line;
+    var customer = null;
+    var loggedIn = false;
 
     return {
         logIn: function (login) {
 
             return $http.post(myUrl.key1+"/api/customer/login", login);
         },
-        isLoggedIn: function () {
-            return isLoggedIn;
+
+        setCustomer: function (user) {
+            customer = user;
         },
+
+        setLoggedIn: function (isLogged) {
+            loggedIn = isLogged;
+        },
+
         getCustomer: function () {
-            var local=this.getUser();
-            console.log("kolla om det ropar " + local);
-            if (local!= null){
-            line = local.firstName;
-
+            return customer;
+        },
+        getCustomerFirstName: function () {
+            if (customer) {
+                var line = customer.firstName;
+            } else {
+                line = null;
             }
-            else {line ="null";}
-
+            console.log("kolla om det getUserFirstName moved to login services " + line);
             return line;
-
         },
-        getUser: function () {
-
-            return user;
+        getCustomerId: function () {
+            return customer.customerId;
         },
-        getUserId: function () {
-            return user.customerId;
-        },
-        setUser: function (inUser) {
 
-            user = inUser;
-
-        },
-        setLoginState: function (state) {
-            isLoggedIn = state;
+        isLoggedIn: function () {
+            return loggedIn;
         }
+
     }
 
 }]);

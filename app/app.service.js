@@ -1,22 +1,38 @@
 angular.module("app").factory("appServiceFactory", function () {
 
-    var userHome= "";
-    var userIsSet= false;
+
+    var totalAmount = 0;
+    var productList = null;
 
     return {
-        getUserHome : function () {
-            return userHome;
-        },
-        setUserHome: function (user) {
+
+    /*    setUserHome: function (user) {
             userHome = user;
-                 }
-        ,
-        getUserIsSet : function () {
-            return userIsSet;
         },
 
         setUserIsSet: function (userIs) {
             userIsSet = userIs;
+        },*/
+        setCartAmount: function (amount) {
+            totalAmount = amount;
+        },
+
+        addCartAmount: function (amount) {
+            totalAmount += amount;
         }
+        ,
+        getCartAmount: function () {
+            return totalAmount;
+        }
+        ,
+        getProductList: function () {
+            return productList;
+        },
+
+        setProductList: function (products) {
+            productList = products;
+        }
+
+
     }
 });

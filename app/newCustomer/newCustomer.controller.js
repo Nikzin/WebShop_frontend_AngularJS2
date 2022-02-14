@@ -1,4 +1,5 @@
-angular.module("newUser").controller("newUserController", ["$scope", "$location", "newUserFactoryService", function ($scope, $location, newUserFactoryService) {
+angular.module("newUser").controller("newUserController", ["$scope", "$location", "newUserFactoryService", "productServiceFactory",
+    function ($scope, $location, newUserFactoryService, productServiceFactory) {
 
     $scope.create = function () {
 

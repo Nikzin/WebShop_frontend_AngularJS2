@@ -1,10 +1,10 @@
 angular.module("cart")
-    .controller("cartController", ["$scope", "$location", "cartServiceFactory", "loginServiceFactory",
-        function ($scope, $location, cartServiceFactory, loginServiceFactory) {
+    .controller("cartController", ["$scope", "$location", "cartServiceFactory", "loginServiceFactory",  "appServiceFactory","productServiceFactory",
+        function ($scope, $location, cartServiceFactory, loginServiceFactory, appServiceFactory, productServiceFactory) {
         var cart = cartServiceFactory.getCart();
         $scope.cart = cart;
 
-            
+
         $scope.checkCart = function () {
                 if(cart.length > 0){
                     $scope.cartMessage = "Cart:";
@@ -17,8 +17,8 @@ angular.module("cart")
             };
         
         $scope.sendOrder = function () {
-            if (loginServiceFactory.isLoggedIn() == true){
-                cartServiceFactory.sendOrder1(cart, loginServiceFactory.getUser()).then(function () {
+            if (loginServiceFactory.isLoggedIn()){
+                cartServiceFactory.sendOrder1(cart, loginServiceFactory.getCustomer()).then(function () {
                     $location.url("/order-sent");
                     cart = [];
                 }, function () {

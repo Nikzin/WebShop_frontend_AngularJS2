@@ -1,10 +1,50 @@
-angular.module("user").controller("userController", ["$scope", "$location", "$http", "userFactoryService", "loginServiceFactory","productServiceFactory" ,function ($scope, $location, $http, userFactoryService, loginServiceFactory, productServiceFactory) {
+angular.module("user").controller("userController", ["$scope", "$location", "$http", "appServiceFactory", "userFactoryService", "loginServiceFactory","productServiceFactory"
+    ,function ($scope, $location, $http, appServiceFactory, userFactoryService, loginServiceFactory, productServiceFactory) {
 
     var user;
     var userOrders;
     $scope.totalAmount1 = 0;
 
-    userFactoryService.getUserOrders(loginServiceFactory.getUserId()).then(function (response) {
+        var init = function () {
+            var userId = loginServiceFactory.getCustomerId();
+            if (!userId){
+                $location.url("/login");
+            }
+            else
+            {
+                userFactoryService.getUserOrders(userId).then(function (response) {
+
+                    userOrders = response.data;
+                    var orderProducts = [];
+                    var allProducts = [];
+
+                    angular.forEach(userOrders, function (order) {
+                        orderProducts.push(order.products);
+                    });
+
+                    productServiceFactory.getProductsByCategoryId().then(function (response) {
+                        allProducts = response.data;
+                        var total = 0;
+                        angular.forEach(orderProducts, function (op) {
+                            angular.forEach(allProducts, function (p) {
+                                if (op[0].productId == p.id) {
+                                    total += (p.price * op[0].quantity);
+                                }
+                            });
+                        });
+                        $scope.totalAmount1 = total;
+                    });
+
+                    $scope.userOrders = userOrders;
+                });
+            }
+        };
+
+        init();
+//do it as init for this page to get the orders and make it as scope , not var.
+/*    userFactoryService.getUserOrders(appServiceFactory.getUserId()).then(function (response) {
+
+
         userOrders = response.data;
         var orderProducts = [];
         var allProducts = [];
@@ -13,25 +53,40 @@ angular.module("user").controller("userController", ["$scope", "$location", "$ht
             orderProducts.push(order.products);
                    });
 
-        productServiceFactory.getProductByCategoryId().then(function (response) {
+/!*        productServiceFactory.getProductsByCategoryId().then(function (response) {
             allProducts = response.data;
             var total = 0;
             angular.forEach(orderProducts , function (products) {
                 angular.forEach(products, function (product) {
                     angular.forEach(allProducts, function (item) {
                         if(product.productId == item.id)  {
+                            debugger;
                             total += (item.price * product.quantity);
                         }
                     })
                 });
             });
             $scope.totalAmount1 = total;
+        });*!/
+
+
+        productServiceFactory.getProductsByCategoryId().then(function (response) {
+            allProducts = response.data;
+            var total = 0;
+            angular.forEach(orderProducts, function (op) {
+                angular.forEach(allProducts, function (p) {
+                    if (op[0].productId == p.id) {
+                        total += (p.price * op[0].quantity);
+                    }
+                });
+            });
+            $scope.totalAmount1 = total;
         });
 
         $scope.userOrders = userOrders;
-    });
+    });*/
 
-    userFactoryService.getUserInfo(loginServiceFactory.getUserId()).then(function (response) {
+    userFactoryService.getUserInfo(loginServiceFactory.getCustomerId()).then(function (response) {
         user = response.data;
 
         $scope.firstname = user.firstName;
@@ -60,9 +115,9 @@ angular.module("user").controller("userController", ["$scope", "$location", "$ht
         userFactoryService.updateUserInfo(user.customerId, userInfo).then(function (response) {
             console.log(response);
 
-            userInfo.id = loginServiceFactory.getUserId();
+            userInfo.id = loginServiceFactory.getCustomerId();
             delete userInfo['password'];
-            loginServiceFactory.setUser(userInfo);
+            loginServiceFactory.setCustomer(userInfo);
                });
     };
 

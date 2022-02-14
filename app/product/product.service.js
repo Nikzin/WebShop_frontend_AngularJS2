@@ -1,6 +1,7 @@
 angular.module("product").factory("productServiceFactory", ['myUrl',"$http", function ( myUrl,$http) {
     var chosenCategory;
-    var isHome= true;
+  //  var isHome= true;
+    var products3=null;
 
     return {
 
@@ -8,22 +9,20 @@ angular.module("product").factory("productServiceFactory", ['myUrl',"$http", fun
           return $http.get(myUrl.key1+"/api/product/"+id);
         },
 
-        getProductByCategoryId  :   function () {
-            if (chosenCategory==undefined){chosenCategory="";
-               }
 
+        getProductsByCategoryId: function (id) {
+
+            if (!id){
+                chosenCategory ="";
+            } else {
+                chosenCategory=id;
+            }
             return $http.get(myUrl.key1+"/api/productbycategory/"+chosenCategory );
         },
 
         setnoCategory :   function () {
             chosenCategory="";
          },
-        isHome: function () {
-            return isHome;
-        },
-        setHomeState: function (state) {
-            isHome = state;
-        },
 
         setChosenCategory   :   function (categoryId) {
             chosenCategory = categoryId;
@@ -31,6 +30,17 @@ angular.module("product").factory("productServiceFactory", ['myUrl',"$http", fun
                        chosenCategory="";
                 }
         },
+
+        setProducts3: function (products2){
+            products3 = products2;
+
+        },
+
+        getProducts3: function (){
+            return products3;
+        },
+
+
         getChosenCategory   : function () {
             return chosenCategory;
         },
